@@ -13,11 +13,15 @@ def stats(chan, yung):
     # print(list(chan_fd.keys())[:20])
     # print(list(yung_fd.keys())[:20])
 
-    # chan_top50 = list(chan_fd.keys())[:50]
-    # yung_top50 = list(yung_fd.keys())[:50]
+    chan_top20 = list(chan_fd.keys())[:50]
+    yung_top20 = list(yung_fd.keys())[:50]
     common_word = set(list(chan_fd)) & set(list(yung_fd))
     common_fq = { w : (chan_fd[w] + yung_fd[w])  for w in common_word}
+
+    print(chan_top20)
+    print(yung_top20)
     print({k: v for k, v in sorted(common_fq.items(), key=lambda item: item[1], reverse=True)})
+
 
 def clean_text(xml_txt):
 
