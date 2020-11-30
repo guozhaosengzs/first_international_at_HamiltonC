@@ -5,22 +5,27 @@ import lxml
 import re
 import pandas as pd
 import nltk
+from itertools import islice
 
 def stats(chan, yung):
     chan_fd = nltk.FreqDist(chan)
+    chan_fd_s = sort_dict(chan_fd)
+
     yung_fd = nltk.FreqDist(yung)
+    yung_fd = 
 
-    # print(list(chan_fd.keys())[:20])
-    # print(list(yung_fd.keys())[:20])
 
-    chan_top20 = list(chan_fd.keys())[:50]
-    yung_top20 = list(yung_fd.keys())[:50]
+    chan_top20 = list(chan_fd.keys())[:20]
+    yung_top20 = list(yung_fd.keys())[:20]
     common_word = set(list(chan_fd)) & set(list(yung_fd))
     common_fq = { w : (chan_fd[w] + yung_fd[w])  for w in common_word}
 
-    print(chan_top20)
-    print(yung_top20)
-    print({k: v for k, v in sorted(common_fq.items(), key=lambda item: item[1], reverse=True)})
+    first_20 = take(20, d.items())
+
+    print(first_20)
+    # print(chan_fd)
+    # print(yung_top20)
+    # print({k: v for k, v in sorted(common_fq.items(), key=lambda item: item[1], reverse=True)})
 
 
 def clean_text(xml_txt):
@@ -79,6 +84,18 @@ def make_xml():
     f.close()
 
     return 'marked_data.xml'
+
+
+def sort_dict(dic):
+    """ Sort a dictionary keys by values, in descending order. """
+
+    return {k: v for k, v in sorted(dic.items(), key=lambda item: item[1], reverse=True)}
+
+
+def take(n, iterable):
+    """ Return the first n items from an iterable object. """
+
+    return list(islice(iterable, n))
 
 
 def main():
