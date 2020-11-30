@@ -12,20 +12,18 @@ def stats(chan, yung):
     chan_fd_s = sort_dict(chan_fd)
 
     yung_fd = nltk.FreqDist(yung)
-    yung_fd = 
+    yung_fd_s = sort_dict(nltk.FreqDist(yung))
 
+    chan_top20 = take(20, chan_fd_s)
+    yung_top20 = take(20, yung_fd_s)
 
-    chan_top20 = list(chan_fd.keys())[:20]
-    yung_top20 = list(yung_fd.keys())[:20]
     common_word = set(list(chan_fd)) & set(list(yung_fd))
     common_fq = { w : (chan_fd[w] + yung_fd[w])  for w in common_word}
+    common_fq_s = sort_dict(common_fq)
 
-    first_20 = take(20, d.items())
-
-    print(first_20)
-    # print(chan_fd)
-    # print(yung_top20)
-    # print({k: v for k, v in sorted(common_fq.items(), key=lambda item: item[1], reverse=True)})
+    print(chan_top20, '\n')
+    print(yung_top20, '\n')
+    print(common_fq_s, '\n')
 
 
 def clean_text(xml_txt):
